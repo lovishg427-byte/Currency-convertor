@@ -1,0 +1,176 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: 0.3s;
+}
+
+/* Light Mode */
+body.light {
+  background: #f4f4f4;
+  color: black;
+}
+
+/* Container */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  width: 380px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header button {
+  background: white;
+  color: black;
+}
+
+/* Title */
+h1 {
+  font-size: 22px;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Dropdowns */
+.dropdowns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+/* Select */
+select {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  width: 100px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+/* Convert */
+#convertBtn {
+  background: #00c6ff;
+  color: white;
+}
+
+/* Clear */
+.buttons button:nth-child(2) {
+  background: #ff6b6b;
+  color: white;
+}
+
+/* Favorite */
+.buttons button:nth-child(3) {
+  background: gold;
+}
+
+/* Swap */
+.swap-btn {
+  background: white;
+  color: black;
+}
+
+/* Result Box */
+#resultBox {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+/* Result */
+#result {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Rate + Time */
+#rate, #time {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Sections */
+#favoritesBox,
+#historyBox {
+  margin-top: 12px;
+}
+
+/* Section Titles */
+#favoritesBox h3,
+#historyBox h3 {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+/* Items */
+#history p,
+#favorites p {
+  font-size: 12px;
+  background: rgba(255,255,255,0.1);
+  padding: 6px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+/* Multi Convert Button */
+#multi + button {
+  width: 100%;
+  background: #6c5ce7;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* Hover effects */
+button:hover {
+  transform: scale(1.05);
+}

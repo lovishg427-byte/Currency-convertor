@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Currency Converter Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>💱 Currency Converter</h1>
+    <button onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <!-- Amount -->
+  <input 
+    type="number" 
+    id="amount" 
+    placeholder="Enter amount"
+    oninput="convert()"
+  >
+
+  <!-- Dropdowns -->
+  <div class="dropdowns">
+    <select id="fromCurrency"></select>
+
+    <button class="swap-btn" onclick="swap()">🔁</button>
+
+    <select id="toCurrency"></select>
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button id="convertBtn" onclick="convert()">Convert</button>
+    <button onclick="clearAll()">Clear</button>
+    <button onclick="addFavorite()">⭐</button>
+  </div>
+
+ 
+
+  <!-- Result -->
+  <div id="resultBox">
+    <h2 id="result"></h2>
+    <p id="rate"></p>
+    <p id="time"></p>
+  </div>
+
+  <!-- Favorites -->
+  <div id="favoritesBox">
+    <h3>⭐ Favorites</h3>
+    <div id="favorites"></div>
+  </div>
+
+  <!-- History -->
+  <div id="historyBox">
+    <h3>📜 Recent Conversions</h3>
+    <div id="history"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
