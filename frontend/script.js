@@ -1,9 +1,16 @@
-// 🔐 Protect route (redirect if not logged in)
+// 🔐 Protect route
 if (!localStorage.getItem("user")) {
   window.location.replace("login.html");
 }
 
-// ✅ Use relative API (works on localhost + deployed)
+// 👋 Show username
+const user = localStorage.getItem("user");
+if (user) {
+  const el = document.getElementById("welcomeUser");
+  if (el) el.innerText = "👋 Welcome, " + user;
+}
+
+// ✅ Relative API (works on Render)
 const API_URL = "/convert";
 
 // 🌍 Currency list
@@ -40,7 +47,6 @@ async function convert() {
   const timeEl = document.getElementById("time");
   const btn = document.getElementById("convertBtn");
 
-  // 🛑 Validation
   if (!amount || amount <= 0) {
     resultEl.innerText = "Enter valid amount";
     return;
@@ -59,6 +65,11 @@ async function convert() {
       `${API_URL}?from=${from}&to=${to}&amount=${amount}`
     );
 
+    // 🔥 FIX: handle bad responses
+    if (!res.ok) {
+      throw new Error("Server response not OK");
+    }
+
     const data = await res.json();
 
     if (!data.result) {
@@ -73,19 +84,18 @@ async function convert() {
     rateEl.innerText = `Rate: 1 ${from} = ${data.rate} ${to}`;
     timeEl.innerText = `Updated at: ${now}`;
 
-    // 📜 Save history
     saveHistory(`${amount} ${from} → ${to} = ${formatted}`);
     loadHistory();
 
   } catch (err) {
-    console.error(err);
+    console.error("❌ Convert error:", err);
     resultEl.innerText = "❌ Server error";
   } finally {
     btn.disabled = false;
   }
 }
 
-// 🔁 Swap currencies
+// 🔁 Swap
 function swap() {
   const from = document.getElementById("fromCurrency");
   const to = document.getElementById("toCurrency");
@@ -136,7 +146,7 @@ function loadFavorites() {
   favEl.innerHTML = favs.map(f => `<p>${f}</p>`).join("");
 }
 
-// 🌙 Theme toggle
+// 🌙 Theme
 function toggleTheme() {
   document.body.classList.toggle("light");
 }

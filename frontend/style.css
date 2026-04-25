@@ -25,12 +25,13 @@ body.light {
 
 /* Container */
 .container {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 25px;
-  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 28px;
+  border-radius: 18px;
   width: 380px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  transition: 0.3s;
 }
 
 /* Header */
@@ -38,12 +39,7 @@ body.light {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-}
-
-.header button {
-  background: white;
-  color: black;
+  margin-bottom: 10px;
 }
 
 /* Title */
@@ -51,15 +47,33 @@ h1 {
   font-size: 22px;
 }
 
+/* Theme Button */
+.header button {
+  background: white;
+  color: black;
+  padding: 6px 10px;
+}
+
+/* Welcome text */
+#welcomeUser {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
 /* Inputs */
 input {
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   margin-bottom: 12px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   outline: none;
   font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px #00c6ff;
 }
 
 /* Dropdowns */
@@ -87,8 +101,8 @@ select {
 }
 
 button {
-  padding: 8px 10px;
-  border-radius: 8px;
+  padding: 9px 10px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   font-size: 13px;
@@ -121,9 +135,9 @@ button {
 /* Result Box */
 #resultBox {
   margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.12);
   text-align: center;
 }
 
@@ -136,38 +150,40 @@ button {
 /* Rate + Time */
 #rate, #time {
   font-size: 12px;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* Sections */
 #favoritesBox,
 #historyBox {
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 /* Section Titles */
 #favoritesBox h3,
 #historyBox h3 {
   font-size: 13px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 /* Items */
 #history p,
 #favorites p {
   font-size: 12px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.12);
   padding: 6px;
   border-radius: 6px;
   margin-bottom: 5px;
 }
 
-/* Multi Convert Button */
-#multi + button {
+/* Logout button (NEW) */
+.logout-btn {
   width: 100%;
-  background: #6c5ce7;
+  background: #333;
   color: white;
-  margin-bottom: 10px;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* Hover effects */
