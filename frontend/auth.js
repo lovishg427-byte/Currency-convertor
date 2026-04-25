@@ -1,4 +1,4 @@
-const API = "http://localhost:5000";
+const API = "";
 
 // 🔐 Signup
 async function signup() {
@@ -34,7 +34,7 @@ async function login() {
 
   if (data.success) {
     localStorage.setItem("user", username);
-    window.location.href = "index.html"; // go to converter
+    window.location.href = "index.html";
   } else {
     document.getElementById("msg").innerText = data.message;
   }
