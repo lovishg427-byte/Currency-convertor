@@ -2,13 +2,17 @@ const cors = require("cors");
 const express = require("express");
 const axios = require("axios");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
-app.use(express.json()); // 🔥 required for POST
+app.use(express.json());
 
-const USERS_FILE = "users.json";
+// 🔥 serve frontend
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+const USERS_FILE = path.join(__dirname, "../users.json");
 
 
 // ======================
@@ -78,13 +82,8 @@ app.get("/convert", async (req, res) => {
     const rate = response.data.rates[to];
     const result = rate * amount;
 
-    res.json({
-      from,
-      to,
-      amount,
-      rate,
-      result,
-    });
+    res.json({ from, to, amount, rate, result });
+
   } catch (error) {
     res.status(500).json({ error: "Error fetching exchange rate" });
   }
@@ -96,7 +95,7 @@ app.get("/convert", async (req, res) => {
 // ======================
 
 app.get("/", (req, res) => {
-  res.send("Currency API + Auth is running 🚀");
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 
@@ -104,6 +103,8 @@ app.get("/", (req, res) => {
 // 🚀 START SERVER
 // ======================
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
