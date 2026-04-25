@@ -1,9 +1,12 @@
+// 🔐 Protect route (redirect if not logged in)
 if (!localStorage.getItem("user")) {
-  window.location.href = "login.html";
+  window.location.replace("login.html");
 }
-const API_URL = "http://localhost:5000/convert";
 
-// 🌍 Currency list (simple & clean)
+// ✅ Use relative API (works on localhost + deployed)
+const API_URL = "/convert";
+
+// 🌍 Currency list
 const currencyList = [
   "USD","INR","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SGD",
   "NZD","ZAR","AED","SAR","HKD","KRW","THB","MYR","IDR","BRL"
@@ -37,6 +40,7 @@ async function convert() {
   const timeEl = document.getElementById("time");
   const btn = document.getElementById("convertBtn");
 
+  // 🛑 Validation
   if (!amount || amount <= 0) {
     resultEl.innerText = "Enter valid amount";
     return;
@@ -54,6 +58,7 @@ async function convert() {
     const res = await fetch(
       `${API_URL}?from=${from}&to=${to}&amount=${amount}`
     );
+
     const data = await res.json();
 
     if (!data.result) {
@@ -68,17 +73,19 @@ async function convert() {
     rateEl.innerText = `Rate: 1 ${from} = ${data.rate} ${to}`;
     timeEl.innerText = `Updated at: ${now}`;
 
+    // 📜 Save history
     saveHistory(`${amount} ${from} → ${to} = ${formatted}`);
     loadHistory();
 
   } catch (err) {
+    console.error(err);
     resultEl.innerText = "❌ Server error";
   } finally {
     btn.disabled = false;
   }
 }
 
-// 🔁 Swap
+// 🔁 Swap currencies
 function swap() {
   const from = document.getElementById("fromCurrency");
   const to = document.getElementById("toCurrency");
@@ -132,6 +139,12 @@ function loadFavorites() {
 // 🌙 Theme toggle
 function toggleTheme() {
   document.body.classList.toggle("light");
+}
+
+// 🚪 Logout
+function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "login.html";
 }
 
 // 🚀 Init

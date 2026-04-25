@@ -6,12 +6,23 @@
 </head>
 <body>
 
+<script>
+  // 🔐 PROTECT PAGE (VERY IMPORTANT)
+  if (!localStorage.getItem("user")) {
+    window.location.href = "login.html";
+  }
+</script>
+
 <div class="container">
 
   <!-- Header -->
   <div class="header">
     <h1>💱 Currency Converter</h1>
-    <button onclick="toggleTheme()">🌙</button>
+
+    <div>
+      <button onclick="toggleTheme()">🌙</button>
+      <button onclick="logout()">🚪 Logout</button>
+    </div>
   </div>
 
   <!-- Amount -->
@@ -37,8 +48,6 @@
     <button onclick="clearAll()">Clear</button>
     <button onclick="addFavorite()">⭐</button>
   </div>
-
- 
 
   <!-- Result -->
   <div id="resultBox">

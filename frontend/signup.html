@@ -19,6 +19,14 @@
   <p id="msg"></p>
 </div>
 
+<script>
+  // 🔥 Redirect if already logged in
+  if (localStorage.getItem("user")) {
+    window.location.href = "index.html";
+  }
+</script>
+
 <script src="auth.js"></script>
+
 </body>
 </html>

@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔥 serve frontend
+// 🔥 Serve frontend (IMPORTANT)
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 const USERS_FILE = path.join(__dirname, "../users.json");
@@ -60,7 +60,7 @@ app.post("/login", (req, res) => {
   );
 
   if (user) {
-    res.json({ success: true, message: "Login successful ✅" });
+    res.json({ success: true });
   } else {
     res.json({ success: false, message: "Invalid credentials ❌" });
   }
@@ -91,11 +91,11 @@ app.get("/convert", async (req, res) => {
 
 
 // ======================
-// 🏠 DEFAULT ROUTE
+// 🏠 DEFAULT ROUTE (LOGIN FIRST)
 // ======================
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  res.sendFile(path.join(__dirname, "../frontend/login.html"));
 });
 
 
