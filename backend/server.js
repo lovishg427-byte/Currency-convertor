@@ -9,11 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔥 Serve frontend (IMPORTANT)
-app.use(express.static(path.join(__dirname, "../frontend")));
-
 const USERS_FILE = path.join(__dirname, "../users.json");
-
 
 // ======================
 // 🔐 AUTH ROUTES
@@ -44,7 +40,6 @@ app.post("/signup", (req, res) => {
   res.json({ message: "Signup successful ✅" });
 });
 
-
 // Login
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -66,7 +61,6 @@ app.post("/login", (req, res) => {
   }
 });
 
-
 // ======================
 // 💱 CURRENCY ROUTE
 // ======================
@@ -75,9 +69,17 @@ app.get("/convert", async (req, res) => {
   const { from, to, amount } = req.query;
 
   try {
+    if (!from || !to || !amount) {
+      return res.status(400).json({ error: "Missing parameters" });
+    }
+
     const response = await axios.get(
       `https://api.exchangerate-api.com/v4/latest/${from}`
     );
+
+    if (!response.data.rates[to]) {
+      return res.status(400).json({ error: "Invalid currency" });
+    }
 
     const rate = response.data.rates[to];
     const result = rate * amount;
@@ -85,19 +87,22 @@ app.get("/convert", async (req, res) => {
     res.json({ from, to, amount, rate, result });
 
   } catch (error) {
-    res.status(500).json({ error: "Error fetching exchange rate" });
+    console.error("❌ API ERROR:", error.message);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-
 // ======================
-// 🏠 DEFAULT ROUTE (LOGIN FIRST)
+// 🏠 ROUTES (IMPORTANT ORDER)
 // ======================
 
+// 👉 FORCE login page on root
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/login.html"));
 });
 
+// 👉 serve all frontend files AFTER routes
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 // ======================
 // 🚀 START SERVER
